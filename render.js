@@ -9,7 +9,7 @@ function executePython() {
   // 发送输入给 Electron 主进程
 //   console.log(input1,input2,input3)
   ipcRenderer.send("execute-python", { input1, input2, input3 });
-  document.getElementById("input1").value = "";
-  document.getElementById("input2").value = "";
-  document.getElementById("input3").value = "";
+//   document.getElementById("input1").value = "";
+//   document.getElementById("input2").value = "";
+//   document.getElementById("input3").value = "";
 }

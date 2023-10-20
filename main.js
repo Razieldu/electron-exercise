@@ -1,5 +1,5 @@
 // 引入 Electron 模組的 app 和 BrowserWindow
-const { app, BrowserWindow, ipcMain,ipcRenderer } = require("electron");
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
 const { spawn } = require("child_process");
 const path = require("path");
 const electronReload = require("electron-reload");
@@ -19,13 +19,12 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-        nodeIntegration: true,
-        nodeIntegrationInWorker: true,
-        nodeIntegrationInSubFrames: true,
-        enableRemoteModule: true,
-        contextIsolation: false
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true,
+      nodeIntegrationInSubFrames: true,
+      enableRemoteModule: true,
+      contextIsolation: false,
     },
-
   });
 
   // 載入並顯示 index.html 檔案
@@ -38,14 +37,15 @@ function createWindow() {
   );
   ipcMain.on("execute-python", (event, data) => {
     // 调用 Python 脚本并传递输入
-    const { input1, input2, input3 } = data;
+    let { input1, input2, input3 } = data;
+    console.log("ipcMain",data)
     const pythonProcess = spawn("python", [
       "./python/fast.py",
       input1,
       input2,
       input3,
     ]);
- 
+
     // 监听 Python 脚本的输出
     pythonProcess.stdout.on("data", (data) => {
       console.log(data.toString());

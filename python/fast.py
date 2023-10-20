@@ -1,29 +1,29 @@
+# coding: utf-8
+
 import win32com.client
 import pyautogui
 import time
 import pyperclip
-# 创建Excel应用程序对象
-
 import sys
 
+sys.stdout.reconfigure(encoding='utf-8')
+# sys.stdout.encoding = "utf-8"
 userInput = sys.argv
+print(userInput)
+name = userInput[1]
+accountAndPassword = userInput[2]
+ifdelete = userInput[3]
 
-input1 = userInput[1]
-input2 = userInput[2]
-input3 = userInput[3]
-
-print(input1)
-print(input2)
-print(input3)
+# 创建Excel应用程序对象
 # excel = win32com.client.Dispatch("Excel.Application")
 
-# # 打开工作簿
+# # # 打开工作簿
 # workbook = excel.Workbooks.Open(r'C:\Users\jeremydu\Desktop\UserData.xls')
 
-# # 获取工作表
+# # # 获取工作表
 # sheet = workbook.Sheets("UserData")
 
-# # 读取单元格值
+# # # 读取单元格值
 # # value = sheet.Cells(1, 1).Value
 # accountAndPassword = input("輸入以作為帳號及密碼__ ")
 # name = input("輸入姓名__")
@@ -59,7 +59,7 @@ print(input3)
 # ##刪除操作(遠端桌面已經有檔案的時候執行此部分程式碼)
 # if ifdelete =="1":
 #  pyautogui.moveTo(1000,600)
-#  pyautogui.rightClick() 
+#  pyautogui.rightClick()
 #  pyautogui.moveTo(1050,525)
 #  pyautogui.click()
 #  pyautogui.moveTo(1050,530)
@@ -69,7 +69,7 @@ print(input3)
 # pyautogui.moveTo(1000,600)
 # time.sleep(1)
 # pyautogui.rightClick()
-# time.sleep(1) 
+# time.sleep(1)
 # pyautogui.moveTo(1050,460)
 # pyautogui.click()
 
@@ -82,7 +82,7 @@ print(input3)
 # pyautogui.moveTo(565,480)
 # pyautogui.click()
 
-# time.sleep(1) 
+# time.sleep(1)
 
 # ###進入上傳頁面
 # pyautogui.moveTo(620,280)
