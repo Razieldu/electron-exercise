@@ -9,10 +9,14 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 # sys.stdout.encoding = "utf-8"
 userInput = sys.argv
-print(userInput)
+
 name = userInput[1]
 accountAndPassword = userInput[2]
 ifdelete = userInput[3]
+print(name)
+print(accountAndPassword)
+print(ifdelete)
+
 
 # 创建Excel应用程序对象
 # excel = win32com.client.Dispatch("Excel.Application")
