@@ -1,0 +1,62 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1; /* 开始时完全不透明 */
+    }
+    100% {
+      opacity: 0; /* 结束时完全透明 */
+    }
+  }
+  
+.mainContent{
+    position: relative;
+    z-index: 100;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    gap:20px;
+}
+
+.eachInput{
+    width: 320px;
+    height: 50px;
+    display: flex; 
+    justify-content: space-between;
+}
+
+.submitButton{
+  margin-top: 40px;
+  width:100px;
+  height:50px;
+}
+
+.mainContent::before{
+  content: "";
+  /* background-image: url("./asset/brothers.jpg"); */
+  background-size: 800px 600px;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: fadeOut 3s linear forwards; /* 使用名为 "fadeOut" 的动画，持续 5 秒，线性变化，保持最终状态 */
+  z-index: 0
+}
+
+input {
+  z-index: 2; /* 设置输入框的层叠顺序为 2，确保位于背景之上 */
+}
+
+button{
+  z-index: 2
+}
