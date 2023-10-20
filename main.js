@@ -53,7 +53,7 @@ function createWindow() {
       mainWindow.webContents.send("python-output", data.toString());
     });
   });
-//   mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 }
 // 當應用程式就緒時，創建視窗
 app.on("ready", createWindow);
