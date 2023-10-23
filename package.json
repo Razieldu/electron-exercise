@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "chcp 65001 && electron main.js",
+    "start": "chcp 65001 && electron index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^27.0.1",
     "python-shell": "^5.0.0"
   },
   "devDependencies": {
+    "electron": "^27.0.2",
     "electron-reload": "^2.0.0-alpha.1"
   }
 }
