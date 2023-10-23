@@ -48,7 +48,12 @@ pyautogui.click()
 pyautogui.hotkey('ctrl', 'c')
 pyautogui.moveTo(420, 940) #遠端在下面數來第1個
 pyautogui.click()
-pyautogui.moveTo(120,280) #portal位置
+pyautogui.moveTo(55,120) 
+pyautogui.doubleClick()
+pyautogui.moveTo(313,423) 
+for i in range(7):
+ pyautogui.click()
+pyautogui.moveTo(120,410)  
 pyautogui.doubleClick()
 
 
