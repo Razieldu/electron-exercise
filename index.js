@@ -41,7 +41,7 @@ function createWindow() {
     let { input1, input2, input3 } = data;
     console.log("ipcMain",data)
  
-    execFile('./python/fast.exe',[input1, input2, input3],(error, stdout, stderr) => {
+    execFile('./python/fast.py',[input1, input2, input3],(error, stdout, stderr) => {
     if (error) {
       console.error(`Error: ${error}`);
       // 发送错误消息到渲染进程
