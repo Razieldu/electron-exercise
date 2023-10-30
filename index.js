@@ -1,6 +1,6 @@
 // 引入 Electron 模組的 app 和 BrowserWindow
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
-const { spawn,execFile , } = require("child_process");
+const { spawn, execFile } = require("child_process");
 const path = require("path");
 // const electronReload = require("electron-reload");
 const url = require("url");
@@ -10,12 +10,10 @@ const url = require("url");
 //   electron: path.join(__dirname, "node_modules", ".bin", "electron"),
 // });
 
-let mainWindow;
-
 // 創建視窗的函數
 function createWindow() {
   // 創建一個新的瀏覽器視窗
-  mainWindow = new BrowserWindow({
+  let mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -28,30 +26,34 @@ function createWindow() {
   });
 
   // 載入並顯示 index.html 檔案
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "index.html"), // 設定 index.html 的檔案路徑
-      protocol: "file:", // 使用本地文件協議
-      slashes: true, // 使用斜線
-    })
-  );
-
+  // mainWindow.loadURL(
+  //   url.format({
+  //     pathname: path.join(__dirname, "index.html"), // 設定 index.html 的檔案路徑
+  //     protocol: "file:", // 使用本地文件協議
+  //     slashes: true, // 使用斜線
+  //   })
+  // );
+  mainWindow.loadFile("index.html");
   ipcMain.on("execute-python", (event, data) => {
     // 调用 Python 脚本并传递输入
     let { input1, input2, input3 } = data;
-    console.log("ipcMain",data)
- 
-    execFile('./python/fast.py',[input1, input2, input3],(error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error: ${error}`);
-      // 发送错误消息到渲染进程
-      event.sender.send("python-error", error.message);
-      return;
-    }
-    // Python 脚本执行成功，将输出发送回渲染进程
-    // mainWindow.webContents.send("python-output", data.toString());
-    console.log(`Python script output: ${stdout}`); 
-    })
+    console.log("ipcMain", data);
+
+    execFile(
+      "./python/fast.exe",
+      [input1, input2, input3],
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error: ${error}`);
+          // 发送错误消息到渲染进程
+          event.sender.send("python-error", error.message);
+          return;
+        }
+        // Python 脚本执行成功，将输出发送回渲染进程
+        // mainWindow.webContents.send("python-output", data.toString());
+        console.log(`Python script output: ${stdout}`);
+      }
+    );
     // const pythonProcess = spawn("python", [
     //   "./python/fast.exe",
     //   input1,
@@ -67,19 +69,19 @@ function createWindow() {
   });
   // mainWindow.webContents.openDevTools();
 }
-// 當應用程式就緒時，創建視窗
-app.on("ready", createWindow);
 
-// 在所有視窗關閉時退出應用程式（除非在 macOS 上）
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit(); // 退出應用程式
-  }
-});
+app.whenReady().then(() => {
+  createWindow()
 
-// 當應用程式被啟動時，如果沒有視窗存在則創建一個新視窗（通常在 macOS 上）
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow(); // 創建新視窗
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow()
+    }
+  })
+})
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
   }
-});
+})
